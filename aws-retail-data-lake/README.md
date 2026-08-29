@@ -28,18 +28,17 @@ I'm still very new to architecturing cloud diagrams, but I used Amazon S3 for du
 - Running this project will consume a very small amount of AWS credits (usually just a few cents). This covers the S3 storage, the Glue Crawler run, and the Athena pay-per-query data scanned.
 
 ## How to Run This Project
-
-1. Set Up S3 Storage Zones: Create an Amazon S3 bucket and establish distinct prefixes for your data lifecycle: /raw/orders/, /curated/orders/, /quarantine/orders/, and an athena-results/ location for query logs.
-2. Ingest Raw Data: Upload the orders.csv file into the /raw/orders/ prefix.
-3. Catalog the Data: In AWS Glue, create a custom CSV classifier to explicitly define column types (e.g., LONG, STRING, DOUBLE). Run an AWS Glue Crawler using this classifier to register the retail_lake database and table.  
-4. Data Quality Checks: Open Amazon Athena and execute 01_find_invalid_orders.sql to identify records with missing regions or non-positive quantities and prices.
-5. Create Curated Dataset: Run the CTAS (Create Table As Select) query (02_create_curated_parquet.sql) to convert valid records into Apache Parquet format and store them in the Curated Zone.
-6. Quarantine Invalid Records: Run 03_quarantine_rejected_records.sql to route failing records into a dedicated Parquet-backed quarantine table for traceability.
-7. Generate Business Insights: Execute 04_regional_sales_report.sql against the curated Parquet dataset to aggregate total revenue by region.
+1. **Set Up S3 Storage Zones:** Create an Amazon S3 bucket and establish distinct prefixes for your data lifecycle: `/raw/orders/`, `/curated/orders/`, `/quarantine/orders/`, and an `athena-results/` location for query logs.
+2. **Ingest Raw Data:** Upload the `orders.csv` file into the `/raw/orders/` prefix.
+3. **Catalog the Data:** In AWS Glue, create a custom CSV classifier to explicitly define column types (e.g., `LONG`, `STRING`, `DOUBLE`). Run an AWS Glue Crawler using this classifier to register the `retail_lake` database and table.
+4. **Data Quality Checks:** Open Amazon Athena and execute `01_find_invalid_orders.sql` to identify records with missing regions or non-positive quantities and prices.
+5. **Quarantine Invalid Records:** Run the first CTAS query (`02_quarantine_rejected_orders.sql`) to route failing records into a dedicated Parquet-backed quarantine table for traceability.
+6. **Create Curated Dataset:** Run the second CTAS query (`03_create_curated_orders.sql`) to cast the `order_date` to a standard date format, calculate a new `revenue` column, convert valid records into Apache Parquet format, and store them in the Curated Zone.
+7. **Generate Business Insights:** Execute `04_regional_sales_report.sql` against the curated Parquet dataset to aggregate total revenue by region.
 
 ## Lessons Learned
 
-The most challenging part of this project was navigating AWS console errors. Specifically, I was facing IAM role problems during the Glue crawler setup. I also learned how to debug path-formatting issues to prevent 403 Forbidden errors when writing query results to S3.
+This project took me approximately 3 hours to complete. The most challenging part of this project was navigating AWS console errors. Specifically, I was facing IAM role problems during the Glue crawler setup. I also learned how to debug path-formatting issues to prevent 403 Forbidden errors when writing query results to S3.
 
 ## Contact
 
