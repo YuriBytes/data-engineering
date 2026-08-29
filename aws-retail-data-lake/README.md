@@ -25,6 +25,7 @@ I'm still very new to architecturing cloud diagrams, but I used Amazon S3 for du
 - An active AWS Account.
 - IAM permissions configured to create and manage resources in Amazon S3, AWS Glue, and Amazon Athena.
 - The source data file (orders.csv).
+- Running this project will consume a very small amount of AWS credits (usually just a few cents). This covers the S3 storage, the Glue Crawler run, and the Athena pay-per-query data scanned.
 
 ## How to Run This Project
 
