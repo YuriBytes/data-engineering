@@ -10,7 +10,6 @@ Goals:
 4. Establish a fully traceable Quarantine Zone for invalid records to enable future root-cause analysis without discarding source evidence.
 
 ### Data Visualization
-*Final Output:*
 <img width="878" height="279" alt="regional-sales-report" src="https://github.com/user-attachments/assets/8b63b24f-4077-4723-a605-4b9f6541ec4c" />
 
 
