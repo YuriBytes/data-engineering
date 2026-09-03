@@ -2,8 +2,6 @@
 
 <info>
 
-![GitHub use this template button](use-this-template-button.png)
-
 ## Overview
 
 The Campus Pulse project is an end-to-end data pipeline designed to measure activity totals by event type across different campus zones. By processing fresh streaming data, this pipeline allows decision-makers to respond to campus usage patterns and make informed operational choices as events happen.  
