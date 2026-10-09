@@ -18,16 +18,14 @@ This project will be built in a Databricks data lakehouse that will turn Apple H
 
 <>
 
-- Prerequisite 1
-- Prerequisite 2
-- Prerequisite 3
+- DataBricks account
 
 ## How to Run This Project
 
 <>
 
-1. 
-2. 
+1. Create a new workspace
+2. Import health data
 3. 
 4. 
 
